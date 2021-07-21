@@ -1,13 +1,28 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
     <div class="main">
         <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+            <BSNavbar IsExpand="true" IsDark="false" style="width: 100%;">
+                <BSNavbarBrand Href="/">Biteline</BSNavbarBrand>
+                <BSNav IsList="true" Class="mr-auto" IsNavbar="true">
+                    <BSNavItem>
+                        <BSNavLink IsActive="true" Href="/">Home</BSNavLink>
+                    </BSNavItem>
+                    <BSNavItem>
+                        <BSNavLink IsActive="true" Href="/donateFood">Donate Food</BSNavLink>
+                    </BSNavItem>
+                </BSNav>
+                <BSNav IsList="true" IsNavbar="true" Alignment="Alignment.Right">
+                    <BSNavItem>
+                        <BSNavLink IsActive="true" Href="/profile">Profile</BSNavLink>
+                    </BSNavItem>
+                    <BSNavItem>
+                        <BSNavLink IsActive="true" Href="/logout">Logout</BSNavLink>
+                    </BSNavItem>
+                </BSNav>
+            </BSNavbar>
         </div>
 
         <div class="content px-4">
