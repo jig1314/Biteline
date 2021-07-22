@@ -10,5 +10,7 @@ namespace Biteline.Shared
         public string PrepTime { get; set; }
 
         public string ThumbnailURL { get; set; }
+
+        public string URL { get; set; }
     }
 }

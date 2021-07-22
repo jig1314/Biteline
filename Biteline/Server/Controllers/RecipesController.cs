@@ -32,7 +32,8 @@ namespace Biteline.Server.Controllers
             {
                 Name = (string)recipe["name"],
                 ThumbnailURL = (string)recipe["thumbnail_url"],
-                PrepTime = (string)recipe["cook_time_minutes"]
+                PrepTime = (string)recipe["cook_time_minutes"],
+                URL = "https://tasty.co/recipe/" + (string)recipe["slug"]
             });
 
             return recipes;
@@ -54,7 +55,8 @@ namespace Biteline.Server.Controllers
             {
                 Name = (string)recipe["name"],
                 ThumbnailURL = (string)recipe["thumbnail_url"],
-                PrepTime = (string)recipe["cook_time_minutes"]
+                PrepTime = (string)recipe["cook_time_minutes"],
+                URL = "https://tasty.co/recipe/" + (string)recipe["slug"]
             });
 
             return recipes;

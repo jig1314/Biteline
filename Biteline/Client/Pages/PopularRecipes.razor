@@ -11,10 +11,14 @@
             {
                 <BSCol style="padding-left: 10px; padding-right: 10px; margin-bottom: 15px; min-width: 350px; max-width: 50%;">
                     <BSMedia MediaType="MediaType.Media" style="margin: 15px;">
-                        <BSMedia MediaType="MediaType.Image" VerticalAlignment="BlazorStrap.VerticalAlignment.Center" src="@recipe.ThumbnailURL" style="width: 50px; height: 50px;" />
+                        <BSMedia MediaType="MediaType.Image" VerticalAlignment="BlazorStrap.VerticalAlignment.Center" src="@recipe.ThumbnailURL" style="width: 75px; height: 75px;" />
                         <div class="media-body" style="width: 100%;">
                             <h5 style="width: 100%; margin-bottom: 0px;">@recipe.Name</h5>
-                            <p style="margin: auto; width: 100%;" class="form-text text-muted">Est. @recipe.PrepTime minutes</p>
+                            @if (!string.IsNullOrWhiteSpace(@recipe.PrepTime))
+                            {
+                                <p style="margin: auto; width: 100%;" class="form-text text-muted">Est. @recipe.PrepTime minutes</p>
+                            }
+                            <a href="@recipe.URL">Go to site</a>
                         </div>
                     </BSMedia>
                 </BSCol>
