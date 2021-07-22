@@ -1,0 +1,38 @@
+﻿@using Biteline.Client.ViewModels
+
+<BSContainer>
+    <BSRow>
+        <BSCol>
+            <h4>Items</h4>
+        </BSCol>
+        <BSCol>
+            <h4 style="text-align: right;">Add <i @onclick="(() => OnAddButtonClicked.InvokeAsync())" style="font-size: 1.25rem; cursor: pointer;" class="fas fa-plus-circle"></i></h4>
+        </BSCol>
+    </BSRow>
+    <BSRow>
+        @if (Items != null)
+        {
+            @foreach (var item in Items)
+            {
+                <BSCol style="padding-left: 10px; padding-right: 10px; margin-bottom: 15px; min-width: 250px; max-width: 50%;">
+                    <BSCard>
+                        <BSCard CardType="CardType.Image" VerticalAlignment="BlazorStrap.VerticalAlignment.Top" src="food-image.png"></BSCard>
+                        <BSCard CardType="CardType.Body">
+                            <BSCard CardType="CardType.Title">@item.Name</BSCard>
+                            <BSCard CardType="CardType.Subtitle">Expires in @(item.ExpirationDate.Value.Subtract(DateTime.Today).Days) days</BSCard>
+                        </BSCard>
+                    </BSCard>
+                </BSCol>
+            }
+        }
+    </BSRow>
+</BSContainer>
+
+@code
+{
+    [Parameter]
+    public EventCallback OnAddButtonClicked { get; set; }
+
+    [Parameter]
+    public List<AddItemViewModel> Items { get; set; }
+}

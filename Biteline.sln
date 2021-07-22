@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biteline.Server", "Biteline\Server\Biteline.Server.csproj", "{11599C02-DE59-4740-B461-37D2C85278EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biteline.Server", "Biteline\Server\Biteline.Server.csproj", "{11599C02-DE59-4740-B461-37D2C85278EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biteline.Client", "Biteline\Client\Biteline.Client.csproj", "{085049FE-894C-4BF7-9F91-AB75C66A4CF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biteline.Client", "Biteline\Client\Biteline.Client.csproj", "{085049FE-894C-4BF7-9F91-AB75C66A4CF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biteline.Shared", "Biteline\Shared\Biteline.Shared.csproj", "{8D6E998E-BD2B-49B2-A495-836B552972B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biteline.Shared", "Biteline\Shared\Biteline.Shared.csproj", "{8D6E998E-BD2B-49B2-A495-836B552972B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

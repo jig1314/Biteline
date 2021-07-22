@@ -1,0 +1,38 @@
+﻿<BSContainer>
+    <BSRow>
+        <BSCol>
+            <h4 style="text-align: center;">Recipe Suggestions</h4>
+        </BSCol>
+    </BSRow>
+    <BSRow>
+        <BSCol>
+            <h5>Add Items</h5>
+            <DxTagBox Data="@Items"
+                      NullText="Search for food items..."
+                      TData="string"
+                      TValue="string"
+                      AllowCustomTags="false"
+                      @bind-Tags="@SelectedItems"
+                      SelectedItemsChanged="@((IEnumerable<string> items) => SelectedItemsChanged(items))"
+                      ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                      CssClass="cw-480" />
+        </BSCol>
+    </BSRow>
+    <BSRow>
+        @if (Recipes != null)
+        {
+            foreach (var recipe in Recipes)
+            {
+                <BSCol style="padding-left: 10px; padding-right: 10px; margin-bottom: 15px; min-width: 350px; max-width: 50%;">
+                    <BSMedia MediaType="MediaType.Media" style="margin: 15px;">
+                        <BSMedia MediaType="MediaType.Image" VerticalAlignment="BlazorStrap.VerticalAlignment.Center" src="@recipe.ThumbnailURL" style="width: 50px; height: 50px;" />
+                        <div class="media-body" style="width: 100%;">
+                            <h5 style="width: 100%; margin-bottom: 0px;">@recipe.Name</h5>
+                            <p style="margin: auto; width: 100%;" class="form-text text-muted">Est. @recipe.PrepTime minutes</p>
+                        </div>
+                    </BSMedia>
+                </BSCol>
+            }
+        }
+    </BSRow>
+</BSContainer>

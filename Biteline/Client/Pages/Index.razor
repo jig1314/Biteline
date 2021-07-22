@@ -1,7 +1,50 @@
 ﻿@page "/"
+@using Biteline.Client.ViewModels
 
-<h1>Hello, world!</h1>
+<BSRow>
+    <BSCol XS="4">
+        <FoodItemList Items="Items" OnAddButtonClicked="ChangeToAddMode" />
+    </BSCol>
+    <BSCol>
+        @if (addItemMode)
+        {
+            <AddItem OnClose="ChangeToDefaultMode" OnAddItem="AddItem" />
+        }
+        else
+        {
+            <BSRow>
+                <PopularRecipes />
+            </BSRow>
+            <BSRow>
+                <RecipeSuggestions Items="ItemNames"/>
+            </BSRow>
+        }
+    </BSCol>
+</BSRow>
 
-Welcome to your new app.
+@code
+{
+    List<string> ItemNames = new List<string>();
+    List<AddItemViewModel> Items = new List<AddItemViewModel>();
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    bool addItemMode = false;
+
+    protected void ChangeToAddMode()
+    {
+        addItemMode = true;
+    }
+
+    protected void ChangeToDefaultMode()
+    {
+        addItemMode = false;
+    }
+
+    protected void AddItem(AddItemViewModel item)
+    {
+        Items.Add(item);
+        if (!ItemNames.Contains(item.Name))
+        {
+            ItemNames.Add(item.Name);
+        }
+    }
+}
