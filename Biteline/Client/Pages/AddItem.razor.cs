@@ -9,7 +9,7 @@ namespace Biteline.Client.Pages
 {
     public partial class AddItem
     {
-        public AddItemViewModel AddItemViewModel { get; set; } = new AddItemViewModel();
+        public AddItemViewModel AddItemViewModel { get; set; } = new AddItemViewModel() { Quantity = 1 };
 
         [Parameter]
         public EventCallback<AddItemViewModel> OnAddItem { get; set; }
