@@ -9,27 +9,24 @@ using System.Threading.Tasks;
 
 namespace Biteline.Client.Pages
 {
-    public partial class RecipeSuggestions
+    public partial class DonateFood
     {
-        public List<Recipe> Recipes { get; private set; }
-
         [Inject]
         private HttpClient Http { get; set; }
 
-        [Parameter]
-        public IEnumerable<string> Items { get; set; } = new List<string>();
+        public string ZipCode { get; set; }
 
-        IEnumerable<string> SelectedItems { get; set; } = new List<string>();
+        public List<Center> Centers { get; set; } = new List<Center>();
 
         public bool Searching { get; set; }
 
-        protected async void SelectedItemsChanged(IEnumerable<string> items)
+        protected async void SearchForCenters()
         {
-            if (items?.Count() > 0)
+            if (!string.IsNullOrWhiteSpace(ZipCode))
             {
                 Searching = true;
 
-                Recipes = await Http.GetFromJsonAsync<List<Recipe>>($"api/recipes/{string.Join(',', items)}");
+                Centers = await Http.GetFromJsonAsync<List<Center>>($"api/centers/{ZipCode}");
 
                 Searching = false;
                 StateHasChanged();

@@ -16,9 +16,15 @@ namespace Biteline.Client.Pages
         [Inject]
         private HttpClient Http { get; set; }
 
+        public bool Loading { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
+            Loading = true;
+
             Recipes = await Http.GetFromJsonAsync<List<Recipe>>($"api/recipes");
+
+            Loading = false;
             StateHasChanged();
         }
     }

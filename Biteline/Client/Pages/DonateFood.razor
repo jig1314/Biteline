@@ -1,0 +1,28 @@
+﻿@page "/donateFood"
+
+<form class="form-inline" @onsubmit="() => { }">
+    <div class="form-group">
+        <label style="padding: unset; justify-content: left;" class="col-sm-6 h4">Enter your zip code:</label>
+        <div class="col-sm-6" style="padding-left: 5px;">
+            <input type="search" class="form-control" @bind="@ZipCode" @bind:event="oninput" @onchange="SearchForCenters" />
+        </div>
+    </div>
+</form>
+<h4 style="margin-top: 15px; margin-bottom: 15px;">Available Food Donation Centers near you</h4>
+@if (Searching)
+{
+    <div class="spinner-border"></div>
+}
+else
+{
+    @foreach (var center in Centers)
+    {
+        <BSCard style="margin-top: 15px; margin-bottom: 15px;">
+            <BSCard CardType="CardType.Body">
+                <BSCard CardType="CardType.Title">@center.Name</BSCard>
+                <BSCard CardType="CardType.Text">@center.Description</BSCard>
+                <BSButton style="padding:unset;" Color="Color.Link" ButtonType="ButtonType.Link" Href="@center.URL">Visit website</BSButton>
+            </BSCard>
+        </BSCard>
+    }
+}
