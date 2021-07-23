@@ -23,8 +23,11 @@ namespace Biteline.Client.Pages
 
         protected async void SelectedItemsChanged(IEnumerable<string> items)
         {
-            Recipes = await Http.GetFromJsonAsync<List<Recipe>>($"api/recipes/{string.Join(',', items)}");
-            StateHasChanged();
+            if (items?.Count() > 0)
+            {
+                Recipes = await Http.GetFromJsonAsync<List<Recipe>>($"api/recipes/{string.Join(',', items)}");
+                StateHasChanged();
+            }
         }
     }
 }

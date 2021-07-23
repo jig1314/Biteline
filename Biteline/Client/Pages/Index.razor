@@ -3,12 +3,16 @@
 
 <BSRow>
     <BSCol XS="4">
-        <FoodItemList Items="Items" OnAddButtonClicked="ChangeToAddMode" />
+        <FoodItemList Items="Items" OnAddButtonClicked="ChangeToAddMode" OnEditButtonClicked="OpenEditItem" OnDeleteButtonClicked="DeleteItem" />
     </BSCol>
     <BSCol>
-        @if (addItemMode)
+        @if (viewMode == ViewMode.Add)
         {
             <AddItem OnClose="ChangeToDefaultMode" OnAddItem="AddItem" />
+        }
+        else if (viewMode == ViewMode.Edit)
+        {
+            <EditItem EditItemViewModel="SelectedEditItem" OnClose="ChangeToDefaultMode" OnEditItem="EditItem" />
         }
         else
         {
@@ -16,7 +20,7 @@
                 <PopularRecipes />
             </BSRow>
             <BSRow>
-                <RecipeSuggestions Items="ItemNames"/>
+                <RecipeSuggestions Items="ItemNames" />
             </BSRow>
         }
     </BSCol>
@@ -24,27 +28,57 @@
 
 @code
 {
+    enum ViewMode
+    {
+        Add,
+        Edit,
+        Default
+    }
+
+    ViewMode viewMode = ViewMode.Default;
+    AddItemViewModel SelectedEditItem { get; set; }
+
     List<string> ItemNames = new List<string>();
     List<AddItemViewModel> Items = new List<AddItemViewModel>();
 
-    bool addItemMode = false;
-
     protected void ChangeToAddMode()
     {
-        addItemMode = true;
+        viewMode = ViewMode.Add;
+    }
+
+    protected void ChangeToEditMode()
+    {
+        viewMode = ViewMode.Edit;
     }
 
     protected void ChangeToDefaultMode()
     {
-        addItemMode = false;
+        viewMode = ViewMode.Default;
     }
 
     protected void AddItem(AddItemViewModel item)
     {
+        item.Id = Items.Count;
         Items.Add(item);
-        if (!ItemNames.Contains(item.Name))
-        {
-            ItemNames.Add(item.Name);
-        }
+        ItemNames = Items.Select(item => item.Name).Distinct().ToList();
+    }
+
+    protected void OpenEditItem(AddItemViewModel item)
+    {
+        SelectedEditItem = item;
+        ChangeToEditMode();
+    }
+
+    protected void EditItem(AddItemViewModel item)
+    {
+        Items.RemoveAll(x => x.Id == item.Id);
+        Items.Add(item);
+        ItemNames = Items.Select(item => item.Name).Distinct().ToList();
+    }
+
+    protected void DeleteItem(AddItemViewModel item)
+    {
+        Items.Remove(item);
+        ItemNames = Items.Select(item => item.Name).Distinct().ToList();
     }
 }

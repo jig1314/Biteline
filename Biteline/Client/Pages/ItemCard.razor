@@ -1,0 +1,59 @@
+﻿@using Biteline.Client.ViewModels
+
+<BSCard>
+    <BSCard CardType="CardType.Image" VerticalAlignment="BlazorStrap.VerticalAlignment.Top" src="food-image.png"></BSCard>
+    <BSCard CardType="CardType.Body">
+        <BSButtonGroup style="text-align: right; display: block; width: 100%;" DropdownDirection="DropdownDirection.Right">
+            <BSDropdownToggle @onclick="(() => { IsDropdownOpen = !IsDropdownOpen; })"><i style="cursor: pointer;" class="fas fa-ellipsis-h"></i></BSDropdownToggle>
+            <BSDropdownMenu @bind-IsOpen="@IsDropdownOpen">
+                <BSDropdownItem @onclick="@(() => { OnEditButtonClicked.InvokeAsync(Item); IsDropdownOpen = false; })" IsButton="true">Edit Item</BSDropdownItem>
+                <BSDropdownItem IsDivider="true" />
+                <BSDropdownItem @onclick="OpenDeleteItemModal" IsButton="true">Delete Item</BSDropdownItem>
+            </BSDropdownMenu>
+        </BSButtonGroup>
+        <BSCard CardType="CardType.Title">@Item.Name</BSCard>
+        <BSCard CardType="CardType.Subtitle">Expires in @(Item.ExpirationDate.Value.Subtract(DateTime.Today).Days) days</BSCard>
+    </BSCard>
+</BSCard>
+
+<BSModal @ref="VerticallyCentered" IsCentered="true">
+    <BSModalHeader OnClick="@CloseDeleteItemModal">Delete Item?</BSModalHeader>
+    <BSModalBody><p>You are about to remove @Item.Name from your pantry. Are you sure you want to continue?</p></BSModalBody>
+    <BSModalFooter>
+        <BSButton Color="Color.Primary" @onclick="@DeleteItem">Yes</BSButton>
+        <BSButton Color="Color.Secondary" @onclick="@CloseDeleteItemModal">No</BSButton>
+    </BSModalFooter>
+</BSModal>
+
+@code
+{
+    public bool IsDropdownOpen = false;
+
+    [Parameter]
+    public EventCallback<AddItemViewModel> OnEditButtonClicked { get; set; }
+
+    [Parameter]
+    public EventCallback<AddItemViewModel> OnDeleteButtonClicked { get; set; }
+
+    [Parameter]
+    public AddItemViewModel Item { get; set; }
+
+    BSModal VerticallyCentered;
+
+    void OpenDeleteItemModal(MouseEventArgs e)
+    {
+        VerticallyCentered.Show();
+    }
+
+    void CloseDeleteItemModal(MouseEventArgs e)
+    {
+        VerticallyCentered.Hide();
+    }
+
+    void DeleteItem(MouseEventArgs e)
+    {
+        VerticallyCentered.Hide();
+        OnDeleteButtonClicked.InvokeAsync(Item);
+        IsDropdownOpen = false;
+    }
+}

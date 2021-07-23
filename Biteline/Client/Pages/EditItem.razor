@@ -1,0 +1,76 @@
+﻿@using BlazorStrap.Extensions.FluentValidation
+@using Biteline.Client.ViewModels
+
+<BSContainer style="max-width: 450px; margin-top: 100px;">
+    <BSRow>
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <BSForm Model="@EditItemViewModel" OnValidSubmit="SubmitItem">
+                    <BSFormGroup>
+                        <h2>Edit Food Item</h2>
+                    </BSFormGroup>
+                    <span style="text-align: center; display: block; width: 100%; margin-bottom: 20px;">
+                        <img src="alt-image.png" />
+                    </span>
+                    <span style="text-align: center; display: block; width: 100%;">
+                        <BSButton id="changePhotoButton" class="btn btn-lg btn-primary" style="padding-left: unset; padding-right: unset;">
+                            Add Photo - Coming Soon <i class="far fa-clock"></i>
+                        </BSButton>
+                    </span>
+                    <FluentValidator TValidator="AddItemValidator" />
+                    <BSFormGroup>
+                        <BSLabel For="@EditItemViewModel.Name">Food Item Name</BSLabel>
+                        <BSInput InputType="InputType.Text" @bind-Value="@EditItemViewModel.Name" />
+                        <BSFormFeedback For="@(() => EditItemViewModel.Name)" />
+                    </BSFormGroup>
+                    <BSFormGroup>
+                        <BSLabel For="@EditItemViewModel.ExpirationDate">Expiration Date</BSLabel>
+                        <BSInput InputType="InputType.Date" @bind-Value="@EditItemViewModel.ExpirationDate" />
+                        <BSFormFeedback For="@(() => EditItemViewModel.ExpirationDate)" />
+                    </BSFormGroup>
+                    <BSFormGroup>
+                        <BSLabel For="@EditItemViewModel.Quantity">Expiration Date</BSLabel>
+                        <DxSpinEdit @bind-Value="@EditItemViewModel.Quantity" CssClass="cw-320" />
+                        <BSFormFeedback For="@(() => EditItemViewModel.Quantity)" />
+                    </BSFormGroup>
+                    <BSFormGroup>
+                        <BSCol>
+                            <BSRow style="justify-content: flex-end;">
+                                <BSButton @onclick="Cancel" style="margin: 5px;" IsOutline="true" Color="Color.Dark" ButtonType="ButtonType.Button"><i style="margin: 7px;" class="fas fa-chevron-left"></i>Back</BSButton>
+                                <BSButton style="margin: 5px;" IsOutline="true" Color="Color.Dark" ButtonType="ButtonType.Submit"><i style="margin: 7px;" class="fas fa-check"></i>Update Item</BSButton>
+                            </BSRow>
+                        </BSCol>
+                    </BSFormGroup>
+                </BSForm>
+            </div>
+        </div>
+    </BSRow>
+</BSContainer>
+<style>
+
+    form {
+        margin: 0px 10px;
+    }
+
+    h2 {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        text-align: center;
+    }
+
+    .panel-primary {
+        width: 100%;
+    }
+
+    #changePhotoButton {
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-top: -105px;
+        width: 250px;
+        border: none;
+        border-radius: 0;
+        font-size: 15px;
+        background: #212529b8;
+    }
+</style>
