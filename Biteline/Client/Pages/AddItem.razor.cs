@@ -20,13 +20,13 @@ namespace Biteline.Client.Pages
         protected async void SubmitItem()
         {
             await OnAddItem.InvokeAsync(AddItemViewModel);
-            AddItemViewModel = new AddItemViewModel();
+            AddItemViewModel = new AddItemViewModel() { Quantity = 1 };
         }
 
         protected async void Cancel()
         {
             await OnClose.InvokeAsync();
-            AddItemViewModel = new AddItemViewModel();
+            AddItemViewModel = new AddItemViewModel() { Quantity = 1 };
         }
 
     }
